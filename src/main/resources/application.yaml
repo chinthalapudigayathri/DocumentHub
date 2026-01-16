@@ -1,0 +1,54 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: document-hub
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/documenthub
+
+  redis:
+    host: localhost
+    port: 6379
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: documenthub-group
+      auto-offset-reset: earliest
+      producer:
+        key-serializer: org.apache.kafka.common.serialization.StringSerializer
+        value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+
+  graphql:
+    graphiql:
+      enabled: true
+
+logging:
+  level:
+    root: INFO
+    org.springframework.security: DEBUG
+  appender:
+    logstash:
+      enabled: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+jwt:
+  secret: mySecretKeyForJWTGeneration12345
+  expiration: 3600000 # 1 hour in ms
+
+
+logback:
+  rollingpolicy:
+    max-history: 30
+  encoder:
+    pattern: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"

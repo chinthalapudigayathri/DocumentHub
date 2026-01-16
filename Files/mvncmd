@@ -1,0 +1,28 @@
+#Build Project
+mvn clean install
+
+#Clean
+mvn clean
+
+#Package
+mvn package
+
+#Clean package
+mcn clean package
+
+#Skip tests
+mvn clean install -DskipTests
+
+#run Springboot
+mvn spring-boot:run
+
+#View dependency tree
+mvn spring-boot:run
+
+#local repository redownload
+mvn clean install -U
+
+#Debug springboot project
+mvn spring-boot:run -Dspring-boot.run.jvmArguments="-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005"
+
+
