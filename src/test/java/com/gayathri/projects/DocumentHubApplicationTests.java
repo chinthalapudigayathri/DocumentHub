@@ -1,4 +1,4 @@
-package com.gayathri.projects.DocumentHub;
+package com.gayathri.projects;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
