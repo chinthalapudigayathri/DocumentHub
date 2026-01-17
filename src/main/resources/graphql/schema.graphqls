@@ -1,0 +1,28 @@
+type Document {
+    id: ID!
+    documentNumber: String
+    title: String
+    author: String
+    accessors: [String]
+    updatedAt: String
+    confidential: ConfidentialityLevel
+}
+
+enum ConfidentialityLevel {
+    CONFIDENTIAL
+    NON_CONFIDENTIAL
+    RESTRICTED
+}
+
+type Query {
+    documents: [Document]
+    documentById(id: ID!): Document
+    documentByNumber(documentNumber: String!): Document
+    documentsByConfidentiality(level: ConfidentialityLevel!): [Document]
+}
+
+type Mutation {
+    createDocument(documentNumber: String!, title: String, author: String): Document
+    updateConfidentiality(id: ID!, level: ConfidentialityLevel!): Document
+    deleteDocument(id: ID!): Boolean
+}
