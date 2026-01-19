@@ -7,6 +7,28 @@ docker run -d --name redis -p 6379:6379 redis
 #add this before @SpringbootApplication
 @EnableCaching
 
+#adding redis in kustomization.yaml
+
+#add redis-statefulset.yaml
+
+#to deploy redis on kubernetes
+kubectl apply -k .
+or
+kubectl apply -k src/main/resources
+
+#for stateful manifestation
+kubectl apply -f redis-statefulset.yaml
+or
+kubectl apply -f src/main/resources/redis-statefulset.yaml
+
+# check pods
+kubectl get pods
+kubectl get svc redis
+
+
+#test connectivity
+kubectl exec -it <documenthub-pod> -- redis-cli -h redis -p 6379 ping
+
 #Add redis and cache configurations in pom.xml
 		<!-- Redis -->
 		<dependency>

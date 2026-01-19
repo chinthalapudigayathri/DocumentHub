@@ -1,3 +1,4 @@
 resources:
   - mongodb-deployment.yaml
   - documenthub-deployment.yaml
+  - redis-statefulset.yaml
