@@ -5,3 +5,6 @@ http://localhost:8080/graphql/?continue
 http://localhost:8080/graphiql?path=/graphql
 #or
 http://localhost:8080/graphql-ui
+
+#check if spring security is blocking
+http://localhost:8080/actuator/health
