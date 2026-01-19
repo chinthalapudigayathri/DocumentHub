@@ -21,9 +21,12 @@ public class DocumentServiceImpl implements DocumentService
     * We make it private so that no other class can reach repository layer and interact with Data
      */
     private final DocumentRepository documentRepository;
+    private final KafkaEventProducer eventProducer;
     /* Creating constructor to call repository*/
-    public DocumentServiceImpl(DocumentRepository documentRepository) {
+    public DocumentServiceImpl(DocumentRepository documentRepository,KafkaEventProducer kafkaEventProducer)
+    {
         this.documentRepository = documentRepository;
+        this.eventProducer = kafkaEventProducer;
     }
 
     /*All other methods are public because they implement methods in public interface */
@@ -36,6 +39,8 @@ public class DocumentServiceImpl implements DocumentService
         {
             document.setConfidential(ConfidentialityLevel.Non_Confidential);
         }
+        DocumentEntity saved = documentRepository.save(document);
+        eventProducer.publishDocumentCreated(saved.getId());
 
         return documentRepository.save(document);
 
@@ -89,7 +94,11 @@ public class DocumentServiceImpl implements DocumentService
     @Override
     @CacheEvict(value = "documents", key = "#doc.documentNumber")
     public void deleteDocument(String id) {
+
         documentRepository.deleteById(id);
+        documentRepository.deleteById(id);
+        eventProducer.publishDocumentDeleted(id);
+
     }
 
 

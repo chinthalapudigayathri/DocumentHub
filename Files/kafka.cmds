@@ -1,2 +1,29 @@
 docker run -d --name zookeeper -p 2181:2181 zookeeper:3.8
 docker run -d --name kafka -p 9092:9092 --env ZOOKEEPER_CONNECT=zookeeper:2181 confluentinc/cp-kafka:7.5.0
+
+#pom.xml
+		<!-- Kafka -->
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+		</dependency>
+
+#application.yaml
+		<!-- Kafka -->
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+		</dependency>
+
+#Add a class in service layer for kafka event producer
+
+#Add a class in service layer for kafka event consumer
+
+#start docker
+docker start zookeeper
+
+#execute first two commands
+
+#to see kafka events execute the following commands
+docker exec -it kafka bash
+kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic document-events --from-beginning
